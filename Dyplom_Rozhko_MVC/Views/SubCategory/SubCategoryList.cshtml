@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Dyplom_Rozhko_MVC.SubCategory>
+
+@{
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>SubCategoryList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "SubCategoryCreate")
+</p>
+<div style="overflow-y:auto;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "SubCategoryEdit", new { id = item.SubCategoryId }) |
+                    @Html.ActionLink("Delete", "SubCategoryDelete", new { id = item.SubCategoryId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Dyplom_Rozhko_MVC.Category>
+
+@{
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>CategoryList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CategoryCreate")
+</p>
+<div style="overflow-y:auto;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageUrl)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "CategoryEdit", new { id = item.CategoryId }, null) |
+                    @Html.ActionLink("Delete", "CategoryDelete", new { id = item.CategoryId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
