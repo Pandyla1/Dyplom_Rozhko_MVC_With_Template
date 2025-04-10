@@ -1,7 +1,7 @@
 ﻿@model Dyplom_Rozhko_MVC.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_LayoutPageOther.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageLoginRegister.cshtml";
 }
 
 <main aria-labelledby="title">
@@ -14,31 +14,34 @@
                 <hr />
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="row">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+                    <h5 class="col-md-2 col-form-label">Пошта</h5>
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     </div>
                 </div>
                 <section style="padding-top: 10px"></section>
                 <div class="row">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+                    <h5 class="col-md-2 col-form-label">Пароль</h5>
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     </div>
                 </div>
                 <section style="padding-top: 10px"></section>
                 <div class="row">
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
+                    <h5 class="col-md-2 col-form-label">Підтвердження паролю</h5>
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="offset-md-2 col-md-10">
-                        <input type="submit" value="Register" class="btn btn-outline-dark" />
+                        <input type="submit" value="Створити" class="btn btn-outline-dark" />
                     </div>
                 </div>
             }
+            <p>
+                @Html.ActionLink("Ввійти", "Login")
+            </p>
         </div>
     </div>
 </main>

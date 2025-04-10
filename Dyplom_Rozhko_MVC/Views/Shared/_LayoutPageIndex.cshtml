@@ -92,10 +92,11 @@
                             @Html.ActionLink("Оплата", "Checkout", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                             @Html.ActionLink("Контакти", "Contact", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                         </div>
-                        <div class="navbar-nav ml-auto py-0">
+                        @Html.Partial("_LoginPartial")
+                        @*<div class="navbar-nav ml-auto py-0">
                             <a href="@Url.Action("Login", "Account")" class="nav-item nav-link">Login</a>
                             <a href="@Url.Action("Register", "Account")" class="nav-item nav-link">Register</a>
-                        </div>
+                        </div>*@
                     </div>
                 </nav>
 

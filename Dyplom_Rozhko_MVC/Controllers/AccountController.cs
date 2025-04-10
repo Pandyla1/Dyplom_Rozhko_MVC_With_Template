@@ -86,7 +86,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Перевірте, чи правильно вказані електронна пошта та пароль");
                     return View(model);
             }
         }
