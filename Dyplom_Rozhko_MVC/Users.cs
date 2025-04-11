@@ -14,29 +14,9 @@ namespace Dyplom_Rozhko_MVC
     
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
-        {
-            this.Cart = new HashSet<Cart>();
-            this.Orders = new HashSet<Orders>();
-            this.Wishlist = new HashSet<Wishlist>();
-        }
-    
-        public int UserId { get; set; }
-        public string Name { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
-        public string Phone { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> RoleId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Cart { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
-        public virtual Roles Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wishlist> Wishlist { get; set; }
     }
 }

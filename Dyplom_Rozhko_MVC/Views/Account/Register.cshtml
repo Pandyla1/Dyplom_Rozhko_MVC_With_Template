@@ -14,6 +14,13 @@
                 <hr />
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="row">
+                    <h5 class="col-md-2 col-form-label">Ім'я'</h5>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <section style="padding-top: 10px"></section>
+                <div class="row">
                     <h5 class="col-md-2 col-form-label">Пошта</h5>
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })

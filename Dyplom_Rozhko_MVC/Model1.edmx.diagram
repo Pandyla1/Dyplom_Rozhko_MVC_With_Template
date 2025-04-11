@@ -4,30 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8aeb0c9982b74c0bb45ec7207f6b3d25" Name="Diagram1">
-        <EntityTypeShape EntityType="DyplomModel.Cart" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Category" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+      <Diagram DiagramId="ebdc0fcc103f4e9885d829d269906a4f" Name="Diagram1">
+        <EntityTypeShape EntityType="DyplomModel.Cart" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Category" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="DyplomModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Orders" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Payment" Width="1.5" PointX="8.25" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Product" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Review" Width="1.5" PointX="7.5" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Roles" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.SubCategory" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Users" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DyplomModel.Wishlist" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Orders" Width="1.5" PointX="10.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Payment" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Product" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Review" Width="1.5" PointX="7.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Roles" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.SubCategory" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Wishlist" Width="1.5" PointX="7.5" PointY="19.625" IsExpanded="true" />
         <AssociationConnector Association="DyplomModel.FK_Cart_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="DyplomModel.FK_Cart_Users" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_SubCategory_Category" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Orders_Payment" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Orders_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="DyplomModel.FK_Orders_Users" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Product_SubCategory" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Review_Product" ManuallyRouted="false" />
         <AssociationConnector Association="DyplomModel.FK_Wishlist_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="DyplomModel.FK_Users_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="DyplomModel.FK_Wishlist_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DyplomModel.Users" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

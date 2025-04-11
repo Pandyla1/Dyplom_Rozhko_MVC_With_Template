@@ -20,6 +20,5 @@ namespace Dyplom_Rozhko_MVC
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
         public virtual Product Product { get; set; }
-        public virtual Users Users { get; set; }
     }
 }
