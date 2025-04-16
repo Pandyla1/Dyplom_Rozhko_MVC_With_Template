@@ -72,6 +72,44 @@ namespace Dyplom_Rozhko_MVC.Controllers
             return View(product);
         }
 
+        //[HttpPost]
+        ////[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddToCart(int productId)
+        //{
+        //    DyplomEntities db = new DyplomEntities();
+        //    var product = db.Product.Find(productId);
+
+        //    if (product == null)
+        //        return HttpNotFound();
+
+        //    // Отримуємо поточний кошик із сесії
+        //    List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
+
+        //    var existingItem = cart.FirstOrDefault(p => p.ProductId == product.ProductId);
+        //    if (existingItem != null)
+        //    {
+        //        existingItem.Quantity += 1;
+        //    }
+        //    else
+        //    {
+        //        cart.Add(new Product
+        //        {
+        //            ProductId = product.ProductId,
+        //            ProductName = product.ProductName,
+        //            ImageUrl = product.ImageUrl,
+        //            Price = product.Price,
+        //            Quantity = 1
+        //        });
+        //    }
+
+        //    // Оновлюємо сесію
+        //    Session["Cart"] = cart;
+
+        //    // Повернення назад
+        //    return RedirectToAction("Product", new { id = productId });
+        //}
+
         [Authorize]
         public ActionResult Cart()
         {
