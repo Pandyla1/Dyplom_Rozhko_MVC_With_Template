@@ -22,16 +22,26 @@ namespace Dyplom_Rozhko_MVC.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Shop()
+        [HttpGet]
+        public ActionResult Shop(int id)
         {
             DyplomEntities db = new DyplomEntities();
+            //var category = db.Category.Find(id);
             var viewModel = new ConnectAllTables
             {
-                Product = db.Product.ToList(),
+                Product = db.Product
+                    .Where(item => item.CategoryId == id)
+                    .Include(item => item.Category)
+                    .ToList(),
                 Category = db.Category.ToList(),
             };
             return View(viewModel);
         }
+        //[HttpPost]
+        //public ActionResult Shop()
+        //{
+
+        //}
 
         [HttpGet]
         public ActionResult Product(int id)
@@ -84,6 +94,23 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 Category = db.Category.ToList(),
                 Cart = db.Cart
                     .Where(item=> item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList()
+            };
+            return View(viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Wishlist()
+        {
+            DyplomEntities db = new DyplomEntities();
+            var currentUserID = User.Identity.GetUserId();
+            var viewModel = new ConnectAllTables
+            {
+                Product = db.Product.ToList(),
+                Category = db.Category.ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserID)
                     .Include(item => item.Product)
                     .ToList()
             };

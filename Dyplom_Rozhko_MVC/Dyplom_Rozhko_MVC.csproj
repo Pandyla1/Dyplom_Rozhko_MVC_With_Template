@@ -1292,6 +1292,7 @@
     <Content Include="Views\Shared\_LayoutPageOther.cshtml" />
     <Content Include="Views\Shared\_LayoutPageLoginRegister.cshtml" />
     <Content Include="Views\Manage\ChangeName.cshtml" />
+    <Content Include="Views\User\Wishlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
