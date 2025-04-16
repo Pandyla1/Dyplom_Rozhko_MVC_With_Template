@@ -14,20 +14,11 @@ namespace Dyplom_Rozhko_MVC
     
     public partial class Payment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
-        {
-            this.Orders = new HashSet<Orders>();
-        }
-    
         public int PaymentId { get; set; }
         public string Name { get; set; }
         public string CardNumber { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }
         public Nullable<int> Cvv { get; set; }
         public string PaymentMode { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

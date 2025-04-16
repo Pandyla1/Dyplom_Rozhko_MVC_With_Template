@@ -19,7 +19,6 @@ namespace Dyplom_Rozhko_MVC.Models
         public IEnumerable<Dyplom_Rozhko_MVC.SubCategory> SubCategory { get; set; }
         public IEnumerable<Dyplom_Rozhko_MVC.Users> Users { get; set; }
         public IEnumerable<Dyplom_Rozhko_MVC.Wishlist> Wishlist { get; set; }
-
         public LoginViewModel LoginViewModel { get; set; }
     }
 }

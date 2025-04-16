@@ -17,7 +17,7 @@ namespace Dyplom_Rozhko_MVC
         public int CartId { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
         public virtual Product Product { get; set; }

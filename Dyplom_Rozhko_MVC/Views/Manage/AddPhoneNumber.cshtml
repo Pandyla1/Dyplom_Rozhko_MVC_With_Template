@@ -1,28 +1,32 @@
 ﻿@model Dyplom_Rozhko_MVC.Models.AddPhoneNumberViewModel
 @{
     ViewBag.Title = "Phone Number";
+    Layout = "~/Views/Shared/_LayoutPageLoginRegister.cshtml";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-
-    @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <h4>Add a phone number</h4>
-        <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="row">
-            @Html.LabelFor(m => m.Number, new { @class = "col-md-2 col-form-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
-            </div>
+    <div style="display: grid; place-items: left; height: auto; ">
+        <div style="width: 900px; margin-left: 100px;">
+            @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Додати номер телефону</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="row">
+                    <h5 class="col-md-2 col-form-label">Телефон</h5>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+                    </div>
+                </div>
+                <section style="padding-top: 10px"></section>
+                <div class="row">
+                    <div class="offset-md-2 col-md-10">
+                        <input type="submit" class="btn btn-outline-dark" value="Додати" />
+                    </div>
+                </div>
+            }
         </div>
-        <div class="row">
-            <div class="offset-md-2 col-md-10">
-                <input type="submit" class="btn btn-outline-dark" value="Submit" />
-            </div>
-        </div>
-    }
+    </div>
 </main>
 
 @section Scripts {

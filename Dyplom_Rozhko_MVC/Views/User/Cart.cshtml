@@ -19,11 +19,11 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    @foreach (var item in Model.Product)
+                    @foreach (var item in Model.Cart)
                     {
                         <tr>
-                            <td class="align-middle"><img src="../User/img/product-1.jpg" alt="" style="width: 50px;">@Html.DisplayFor(modelItem => item.ProductName)</td>
-                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Price)₴</td>
+                            <td class="align-middle"><img src="../User/img/product-1.jpg" alt="" style="width: 50px;">@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                            <td class="align-middle">@item.Product.Price₴</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">@Html.DisplayFor(modelItem => item.Price)₴</td>
+                            <td class="align-middle">@item.Product.Price₴</td>
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
                     }

@@ -1,4 +1,5 @@
 ﻿using Dyplom_Rozhko_MVC.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -76,11 +77,15 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Cart()
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserID = User.Identity.GetUserId();
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
-                Cart = db.Cart.ToList()
+                Cart = db.Cart
+                    .Where(item=> item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList()
             };
             return View(viewModel);
         }
