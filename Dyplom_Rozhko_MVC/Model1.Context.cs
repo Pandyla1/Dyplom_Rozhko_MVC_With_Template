@@ -34,7 +34,7 @@ namespace Dyplom_Rozhko_MVC
         public virtual DbSet<Review> Review { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategory> SubCategory { get; set; }
-        public virtual DbSet<Wishlist> Wishlist { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Wishlist> Wishlist { get; set; }
     }
 }

@@ -12,7 +12,7 @@
           <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Category">
@@ -43,7 +43,7 @@
           <Property Name="OrderDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="PaymentId" Type="int" />
           <Property Name="OrderDate" Type="datetime" />
@@ -125,7 +125,7 @@
           </Key>
           <Property Name="WishlistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_Cart_Product">
@@ -136,30 +136,6 @@
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment">
-              <PropertyRef Name="PaymentId" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="PaymentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Orders">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -209,18 +185,6 @@
             </Principal>
             <Dependent Role="SubCategory">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Wishlist_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Wishlist">
-              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -240,14 +204,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Payment" Association="Self.FK_Orders_Payment">
-            <End Role="Payment" EntitySet="Payment" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_Product" Association="Self.FK_Orders_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -264,15 +220,44 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
-          <AssociationSet Name="FK_Wishlist_Product" Association="Self.FK_Wishlist_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Wishlist" EntitySet="Wishlist" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DyplomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DyplomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cart" EntityType="DyplomModel.Cart" />
+          <EntitySet Name="Category" EntityType="DyplomModel.Category" />
+          <EntitySet Name="Contact" EntityType="DyplomModel.Contact" />
+          <EntitySet Name="Orders" EntityType="DyplomModel.Orders" />
+          <EntitySet Name="Payment" EntityType="DyplomModel.Payment" />
+          <EntitySet Name="Product" EntityType="DyplomModel.Product" />
+          <EntitySet Name="Review" EntityType="DyplomModel.Review" />
+          <EntitySet Name="Roles" EntityType="DyplomModel.Roles" />
+          <EntitySet Name="SubCategory" EntityType="DyplomModel.SubCategory" />
+          <EntitySet Name="Users" EntityType="DyplomModel.Users" />
+          <EntitySet Name="Wishlist" EntityType="DyplomModel.Wishlist" />
+          <AssociationSet Name="FK_Cart_Product" Association="DyplomModel.FK_Cart_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="DyplomModel.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_Category" Association="DyplomModel.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategory" Association="DyplomModel.FK_Product_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Product" Association="DyplomModel.FK_Review_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -280,9 +265,9 @@
           <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Cart_Product" FromRole="Cart" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Cart_Product" FromRole="Cart" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -293,8 +278,8 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
-          <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="SubCategory" Relationship="DyplomModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -314,7 +299,7 @@
           <Property Name="OrderDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PaymentId" Type="Int32" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
@@ -322,8 +307,6 @@
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DeliveryMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentNumber" Type="Int32" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Orders_Payment" FromRole="Orders" ToRole="Payment" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Orders_Product" FromRole="Orders" ToRole="Product" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -335,7 +318,6 @@
           <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
           <Property Name="Cvv" Type="Int32" />
           <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Payment" FromRole="Payment" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -355,12 +337,10 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Product" FromRole="Product" ToRole="Orders" />
-          <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
-          <NavigationProperty Name="Review" Relationship="Self.FK_Review_Product" FromRole="Product" ToRole="Review" />
-          <NavigationProperty Name="Wishlist" Relationship="Self.FK_Wishlist_Product" FromRole="Product" ToRole="Wishlist" />
+          <NavigationProperty Name="Cart" Relationship="DyplomModel.FK_Cart_Product" FromRole="Product" ToRole="Cart" />
+          <NavigationProperty Name="Category" Relationship="DyplomModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="SubCategory" Relationship="DyplomModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
+          <NavigationProperty Name="Review" Relationship="DyplomModel.FK_Review_Product" FromRole="Product" ToRole="Review" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -371,7 +351,7 @@
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Review_Product" FromRole="Review" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Review_Product" FromRole="Review" ToRole="Product" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -389,8 +369,18 @@
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+          <NavigationProperty Name="Category" Relationship="DyplomModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Wishlist">
           <Key>
@@ -398,13 +388,12 @@
           </Key>
           <Property Name="WishlistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Wishlist_Product" FromRole="Wishlist" ToRole="Product" />
         </EntityType>
         <Association Name="FK_Cart_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DyplomModel.Cart" Role="Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductId" />
@@ -415,8 +404,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DyplomModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="CategoryId" />
@@ -427,8 +416,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubCategory_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <End Type="DyplomModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="DyplomModel.SubCategory" Role="SubCategory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="CategoryId" />
@@ -438,33 +427,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orders_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment">
-              <PropertyRef Name="PaymentId" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="PaymentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_SubCategory">
-          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DyplomModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubCategory">
               <PropertyRef Name="SubCategoryId" />
@@ -475,8 +440,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Review_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DyplomModel.Review" Role="Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductId" />
@@ -486,72 +451,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Wishlist_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Wishlist">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="DyplomEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cart" EntityType="Self.Cart" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Contact" EntityType="Self.Contact" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="Review" EntityType="Self.Review" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" />
-          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" />
-          <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="SubCategory" EntitySet="SubCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_Payment" Association="Self.FK_Orders_Payment">
-            <End Role="Payment" EntitySet="Payment" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_Product" Association="Self.FK_Orders_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
-            <End Role="SubCategory" EntitySet="SubCategory" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Review_Product" Association="Self.FK_Review_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Review" EntitySet="Review" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Wishlist_Product" Association="Self.FK_Wishlist_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Wishlist" EntitySet="Wishlist" />
-          </AssociationSet>
-          <EntitySet Name="Users" EntityType="DyplomModel.Users" />
-        </EntityContainer>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -561,123 +460,113 @@
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="DyplomModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="DyplomModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contact">
             <EntityTypeMapping TypeName="DyplomModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
-                <ScalarProperty Name="ComtactId" ColumnName="ComtactId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ComtactId" ColumnName="ComtactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DyplomModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
                 <ScalarProperty Name="DepartmentNumber" ColumnName="DepartmentNumber" />
+                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payment">
             <EntityTypeMapping TypeName="DyplomModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
-                <ScalarProperty Name="Cvv" ColumnName="Cvv" />
                 <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Cvv" ColumnName="Cvv" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="DyplomModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
-                <ScalarProperty Name="Sold" ColumnName="Sold" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Review">
             <EntityTypeMapping TypeName="DyplomModel.Review">
               <MappingFragment StoreEntitySet="Review">
-                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="DyplomModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategory">
             <EntityTypeMapping TypeName="DyplomModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
-                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
-                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Wishlist">
-            <EntityTypeMapping TypeName="DyplomModel.Wishlist">
-              <MappingFragment StoreEntitySet="Wishlist">
-                <ScalarProperty Name="WishlistId" ColumnName="WishlistId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -685,9 +574,20 @@
             <EntityTypeMapping TypeName="DyplomModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlist">
+            <EntityTypeMapping TypeName="DyplomModel.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlist">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="WishlistId" ColumnName="WishlistId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

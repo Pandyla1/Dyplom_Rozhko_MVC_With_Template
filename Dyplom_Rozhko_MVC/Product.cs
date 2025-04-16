@@ -18,9 +18,7 @@ namespace Dyplom_Rozhko_MVC
         public Product()
         {
             this.Cart = new HashSet<Cart>();
-            this.Orders = new HashSet<Orders>();
             this.Review = new HashSet<Review>();
-            this.Wishlist = new HashSet<Wishlist>();
         }
     
         public int ProductId { get; set; }
@@ -41,12 +39,8 @@ namespace Dyplom_Rozhko_MVC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }
         public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Review { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wishlist> Wishlist { get; set; }
     }
 }

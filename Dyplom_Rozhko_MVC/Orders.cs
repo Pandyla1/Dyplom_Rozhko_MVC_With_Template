@@ -17,7 +17,7 @@ namespace Dyplom_Rozhko_MVC
         public int OrderDetailsId { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
         public string Status { get; set; }
         public Nullable<int> PaymentId { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
@@ -25,8 +25,5 @@ namespace Dyplom_Rozhko_MVC
         public string City { get; set; }
         public string DeliveryMethod { get; set; }
         public Nullable<int> DepartmentNumber { get; set; }
-    
-        public virtual Payment Payment { get; set; }
-        public virtual Product Product { get; set; }
     }
 }
