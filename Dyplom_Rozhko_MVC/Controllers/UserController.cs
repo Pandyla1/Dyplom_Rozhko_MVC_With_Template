@@ -37,11 +37,6 @@ namespace Dyplom_Rozhko_MVC.Controllers
             };
             return View(viewModel);
         }
-        //[HttpPost]
-        //public ActionResult Shop()
-        //{
-
-        //}
 
         [HttpGet]
         public ActionResult Product(int id)
@@ -53,6 +48,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 Product = new List<Product> { product },
                 Category = db.Category.ToList(),
             };
+            ViewBag.Id = id;
             return View(viewModel);
         }
 
@@ -81,6 +77,23 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 return RedirectToAction("Product", "User");
             }
             return View(product);
+        }
+
+        [Authorize]
+        public ActionResult AddToCart(int productId, Cart cart)
+        {
+            DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
+
+            cart.UserId = currentUserId;
+            cart.ProductId = productId;
+            cart.Quantity = 1;
+            cart.CreatedDate = DateTime.Now;
+
+            db.Cart.Add(cart);
+            db.SaveChanges();
+            
+            return RedirectToAction("Product", new { id = productId });
         }
 
         [Authorize]
