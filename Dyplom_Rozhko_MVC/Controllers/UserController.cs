@@ -80,7 +80,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
         }
 
         [Authorize]
-        public ActionResult AddToCart(int productId, Cart cart)
+        public ActionResult AddToCart(int productId, Cart cart, bool toWishlist)
         {
             DyplomEntities db = new DyplomEntities();
             var currentUserId = User.Identity.GetUserId();
@@ -92,8 +92,14 @@ namespace Dyplom_Rozhko_MVC.Controllers
 
             db.Cart.Add(cart);
             db.SaveChanges();
-            
-            return RedirectToAction("Product", new { id = productId });
+            if (toWishlist)
+            {
+                return RedirectToAction("Wishlist");
+            }
+            else
+            {
+                return RedirectToAction("Product", new { id = productId });
+            }
         }
 
         [Authorize]
@@ -122,7 +128,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
-                Cart = db.Cart
+                Wishlist = db.Wishlist
                     .Where(item => item.UserId == currentUserID)
                     .Include(item => item.Product)
                     .ToList()

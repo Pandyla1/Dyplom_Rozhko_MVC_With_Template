@@ -18,5 +18,7 @@ namespace Dyplom_Rozhko_MVC
         public Nullable<int> ProductId { get; set; }
         public string UserId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

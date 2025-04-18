@@ -18,12 +18,16 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    @foreach (var item in Model.Cart)
+                    @foreach (var item in Model.Wishlist)
                     {
                         <tr>
                             <td class="align-middle"><img src="../User/img/product-1.jpg" alt="" style="width: 50px;">@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
                             <td class="align-middle">@item.Product.Price₴</td>
-                            <td class="align-middle"><button class="btn btn-primary px-3">Додати в кошик</button></td>
+                            <td class="align-middle">
+                                <button class="btn btn-primary px-3">
+                                    <a class="text-dark" href="@Url.Action("AddToCart", new { productId = item.ProductId, toWishlist = true })">Додати в кошик</a>
+                                </button>
+                            </td>
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                         </tr>
                     }

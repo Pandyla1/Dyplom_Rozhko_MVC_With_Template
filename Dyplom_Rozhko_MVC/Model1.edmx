@@ -188,6 +188,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Wishlist_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DyplomModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -220,6 +232,10 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_Product" Association="Self.FK_Wishlist_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -236,7 +252,6 @@
           <EntitySet Name="Roles" EntityType="DyplomModel.Roles" />
           <EntitySet Name="SubCategory" EntityType="DyplomModel.SubCategory" />
           <EntitySet Name="Users" EntityType="DyplomModel.Users" />
-          <EntitySet Name="Wishlist" EntityType="DyplomModel.Wishlist" />
           <AssociationSet Name="FK_Cart_Product" Association="DyplomModel.FK_Cart_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
@@ -256,6 +271,11 @@
           <AssociationSet Name="FK_Review_Product" Association="DyplomModel.FK_Review_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <EntitySet Name="Wishlist" EntityType="DyplomModel.Wishlist" />
+          <AssociationSet Name="FK_Wishlist_Product" Association="DyplomModel.FK_Wishlist_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cart">
@@ -341,6 +361,7 @@
           <NavigationProperty Name="Category" Relationship="DyplomModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="SubCategory" Relationship="DyplomModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="Review" Relationship="DyplomModel.FK_Review_Product" FromRole="Product" ToRole="Review" />
+          <NavigationProperty Name="Wishlist" Relationship="DyplomModel.FK_Wishlist_Product" FromRole="Product" ToRole="Wishlist" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -380,15 +401,6 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Wishlist">
-          <Key>
-            <PropertyRef Name="WishlistId" />
-          </Key>
-          <Property Name="WishlistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductId" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Cart_Product">
@@ -447,6 +459,28 @@
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="Review">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="WishlistId" />
+          </Key>
+          <Property Name="WishlistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Wishlist_Product" FromRole="Wishlist" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Wishlist_Product">
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DyplomModel.Wishlist" Role="Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Wishlist">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
