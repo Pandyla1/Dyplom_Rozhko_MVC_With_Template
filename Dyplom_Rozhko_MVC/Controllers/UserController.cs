@@ -102,6 +102,20 @@ namespace Dyplom_Rozhko_MVC.Controllers
             }
         }
 
+        public ActionResult DeleteFromCart(int cartId)
+        {
+            using (DyplomEntities db = new DyplomEntities())
+            {
+                var cart = db.Cart.Find(cartId);
+                if (cart != null)
+                {
+                    db.Cart.Remove(cart);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Cart");
+        }
+
         [Authorize]
         public ActionResult Cart()
         {
