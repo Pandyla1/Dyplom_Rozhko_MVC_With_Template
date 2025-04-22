@@ -133,6 +133,21 @@ namespace Dyplom_Rozhko_MVC.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
+        public ActionResult AddToWishlist(int productId, Wishlist wishlist)
+        {
+            DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
+
+            wishlist.UserId = currentUserId;
+            wishlist.ProductId = productId;
+            wishlist.CreatedDate = DateTime.Now;
+
+            db.Wishlist.Add(wishlist);
+            db.SaveChanges();
+
+            return RedirectToAction("Product", new { id = productId });
+        }
         public ActionResult DeleteFromWishlist(int wishlistId)
         {
             using (DyplomEntities db = new DyplomEntities())

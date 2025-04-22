@@ -96,7 +96,9 @@
                 <button class="btn btn-primary px-3">
                     <a class="text-dark" href="@Url.Action("AddToCart", new { productId = ViewBag.Id, toWishlist = false })">Додати в кошик</a>
                 </button>
-                <button style="margin-left:10px;" class="btn btn-primary px-3">Додати в бажане</button>
+                <button style="margin-left:10px;" class="btn btn-primary px-3">
+                    <a class="text-dark" href="@Url.Action("AddToWishlist", new { productId = ViewBag.Id })">Додати в бажане</a>
+                </button>
             </div>
         </div>
     </div>
