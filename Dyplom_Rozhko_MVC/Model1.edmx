@@ -45,12 +45,15 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
-          <Property Name="PaymentId" Type="int" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="IsCanceled" Type="bit" />
           <Property Name="City" Type="varchar" MaxLength="100" />
           <Property Name="DeliveryMethod" Type="varchar" MaxLength="50" />
           <Property Name="DepartmentNumber" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="100" />
+          <Property Name="PaymentStatus" Type="bit" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -140,6 +143,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -216,6 +231,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Product" Association="Self.FK_Orders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -245,7 +264,6 @@
           <EntitySet Name="Cart" EntityType="DyplomModel.Cart" />
           <EntitySet Name="Category" EntityType="DyplomModel.Category" />
           <EntitySet Name="Contact" EntityType="DyplomModel.Contact" />
-          <EntitySet Name="Orders" EntityType="DyplomModel.Orders" />
           <EntitySet Name="Payment" EntityType="DyplomModel.Payment" />
           <EntitySet Name="Product" EntityType="DyplomModel.Product" />
           <EntitySet Name="Review" EntityType="DyplomModel.Review" />
@@ -276,6 +294,11 @@
           <AssociationSet Name="FK_Wishlist_Product" Association="DyplomModel.FK_Wishlist_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="DyplomModel.Orders" />
+          <AssociationSet Name="FK_Orders_Product" Association="DyplomModel.FK_Orders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cart">
@@ -312,22 +335,6 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="OrderDetailsId" />
-          </Key>
-          <Property Name="OrderDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductId" Type="Int32" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentId" Type="Int32" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="IsCanceled" Type="Boolean" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DeliveryMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DepartmentNumber" Type="Int32" />
-        </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="PaymentId" />
@@ -362,6 +369,7 @@
           <NavigationProperty Name="SubCategory" Relationship="DyplomModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
           <NavigationProperty Name="Review" Relationship="DyplomModel.FK_Review_Product" FromRole="Product" ToRole="Review" />
           <NavigationProperty Name="Wishlist" Relationship="DyplomModel.FK_Wishlist_Product" FromRole="Product" ToRole="Wishlist" />
+          <NavigationProperty Name="Orders" Relationship="DyplomModel.FK_Orders_Product" FromRole="Product" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -485,6 +493,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderDetailsId" />
+          </Key>
+          <Property Name="OrderDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCanceled" Type="Boolean" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentNumber" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentStatus" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="DyplomModel.FK_Orders_Product" FromRole="Orders" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Orders_Product">
+          <End Type="DyplomModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DyplomModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -522,23 +562,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ComtactId" ColumnName="ComtactId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="DyplomModel.Orders">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="DepartmentNumber" ColumnName="DepartmentNumber" />
-                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -622,6 +645,26 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="WishlistId" ColumnName="WishlistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DyplomModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DepartmentNumber" ColumnName="DepartmentNumber" />
+                <ScalarProperty Name="DeliveryMethod" ColumnName="DeliveryMethod" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderDetailsId" ColumnName="OrderDetailsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

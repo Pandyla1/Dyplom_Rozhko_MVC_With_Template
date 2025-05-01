@@ -20,6 +20,7 @@ namespace Dyplom_Rozhko_MVC
             this.Cart = new HashSet<Cart>();
             this.Review = new HashSet<Review>();
             this.Wishlist = new HashSet<Wishlist>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int ProductId { get; set; }
@@ -45,5 +46,7 @@ namespace Dyplom_Rozhko_MVC
         public virtual ICollection<Review> Review { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wishlist> Wishlist { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

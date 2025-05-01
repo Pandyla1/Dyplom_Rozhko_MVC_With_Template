@@ -28,7 +28,6 @@ namespace Dyplom_Rozhko_MVC
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Review> Review { get; set; }
@@ -36,5 +35,6 @@ namespace Dyplom_Rozhko_MVC
         public virtual DbSet<SubCategory> SubCategory { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Wishlist> Wishlist { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
     }
 }

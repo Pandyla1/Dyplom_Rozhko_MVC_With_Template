@@ -19,11 +19,16 @@ namespace Dyplom_Rozhko_MVC
         public Nullable<int> Quantity { get; set; }
         public string UserId { get; set; }
         public string Status { get; set; }
-        public Nullable<int> PaymentId { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<bool> IsCanceled { get; set; }
         public string City { get; set; }
         public string DeliveryMethod { get; set; }
         public Nullable<int> DepartmentNumber { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string PaymentMethod { get; set; }
+        public Nullable<bool> PaymentStatus { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

@@ -179,18 +179,23 @@ namespace Dyplom_Rozhko_MVC.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Checkout()
-        {
-            DyplomEntities db = new DyplomEntities();
-            var viewModel = new ConnectAllTables
-            {
-                Product = db.Product.ToList(),
-                Category = db.Category.ToList(),
-                Cart = db.Cart.ToList(),
-                Payment = db.Payment.ToList()
-            };
-            return View(viewModel);
-        }
+        //[Authorize]
+        //public ActionResult Checkout()
+        //{
+        //    DyplomEntities db = new DyplomEntities();
+        //    var currentUserID = User.Identity.GetUserId();
+        //    var viewModel = new ConnectAllTables
+        //    {
+        //        Product = db.Product.ToList(),
+        //        Category = db.Category.ToList(),
+        //        Cart = db.Cart
+        //            .Where(item => item.UserId == currentUserID)
+        //            .Include(item => item.Product)
+        //            .ToList(),
+        //        Payment = db.Payment.ToList()
+        //    };
+        //    return View(viewModel);
+        //}
 
         public ActionResult Contact()
         {
@@ -203,5 +208,65 @@ namespace Dyplom_Rozhko_MVC.Controllers
             };
             return View(viewModel);
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Order() 
+        { 
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Order(Orders orders)
+        {
+            DyplomEntities db = new DyplomEntities();
+            var currentUserID = User.Identity.GetUserId();
+            var viewModel = new ConnectAllTables
+            {
+                Product = db.Product.ToList(),
+                Category = db.Category.ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Orders = db.Orders
+            };
+            foreach (var item in viewModel.Cart)
+            {
+                orders.ProductId = item.ProductId;
+                orders.Quantity = 1;
+                orders.UserId = currentUserID;
+                orders.OrderDate = DateTime.Now;
+                db.Orders.Add(orders);
+                db.Cart.Remove(item);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "User");
+        }
+
+        //[HttpPost]
+        //public ActionResult OrderDataSave(Orders orders, string email, string phoneNumber, string city, string deliveryMethod, string branchNumber, string paymentMethod) //Add payment verify
+        //{
+        //    DyplomEntities db = new DyplomEntities();
+        //    var currentUserID = User.Identity.GetUserId();
+        //    var viewModel = new ConnectAllTables
+        //    {
+        //        Cart = db.Cart
+        //            .Where(item => item.UserId == currentUserID)
+        //            .Include(item => item.Product)
+        //            .ToList(),
+        //        Orders = db.Orders
+        //        //Payment = db.Payment.ToList()
+        //    };
+        //    foreach (var item in viewModel.Cart)
+        //    {
+        //        //orders.City = ;
+        //        db.Cart.Remove(item);
+        //        db.SaveChanges();
+        //    }
+        //    return RedirectToAction("Cart");
+        //}
     }
 }

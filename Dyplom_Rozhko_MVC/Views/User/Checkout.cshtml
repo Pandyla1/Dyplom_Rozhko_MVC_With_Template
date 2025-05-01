@@ -1,7 +1,7 @@
 ﻿@model Dyplom_Rozhko_MVC.Models.ConnectAllTables
 
 @{
-    Layout = "~/Views/Shared/_LayoutPageOther.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageLoginRegister.cshtml";
 }
 
 <!-- Checkout Start -->
@@ -12,16 +12,8 @@
                 <h4 class="font-weight-semi-bold mb-4">Підтвердження замовлення</h4>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label>Ім'я</label>
-                        <input class="form-control" type="text" placeholder="">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Прізвище</label>
-                        <input class="form-control" type="text" placeholder="">
-                    </div>
-                    <div class="col-md-6 form-group">
                         <label>Пошта</label>
-                        <input class="form-control" type="text" placeholder="">
+                        <input class="form-control" type="text" value="@User.Identity.Name">
                     </div>
                     <div class="col-md-6 form-group">
                         <label>Номер телефону</label>
@@ -59,29 +51,30 @@
                     <h4 class="font-weight-semi-bold m-0">Товари</h4>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <p>Товар 1</p>
-                        <p>$150</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Товар 2</p>
-                        <p>$150</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Товар 3</p>
-                        <p>$150</p>
-                    </div>
+                    @foreach (var item in Model.Cart)
+                    {
+                        <div class="d-flex justify-content-between">
+                            <p>@item.Product.ProductName</p>
+                            <p>@item.Product.Price₴</p>
+                        </div>
+                    }
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
                         <h5 class="font-weight-bold">Повна сума замовлення</h5>
-                        <h5 class="font-weight-bold">$450</h5>
+                        <h5 class="font-weight-bold">
+                            @*
+                                Додати обрахунок суми всіх товарів    
+                            *@
+                        </h5>
                     </div>
                 </div>
             </div>
             <div class="card border-secondary mb-5">
                 <div class="card-footer border-secondary bg-transparent">
-                    <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Замовити</button>
+                    <a href="@Url.Action("OrderDataSave")">
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Замовити</button>
+                    </a>
                 </div>
             </div>
         </div>
