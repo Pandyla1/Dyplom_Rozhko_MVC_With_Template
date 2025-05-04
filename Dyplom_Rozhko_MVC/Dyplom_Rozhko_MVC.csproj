@@ -1282,7 +1282,6 @@
     <Content Include="Views\SubCategory\SubCategoryEdit.cshtml" />
     <Content Include="Views\SubCategory\SubCategoryList.cshtml" />
     <Content Include="Views\User\Cart.cshtml" />
-    <Content Include="Views\User\Checkout.cshtml" />
     <Content Include="Views\User\Contact.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Product.cshtml" />
