@@ -130,6 +130,14 @@ namespace Dyplom_Rozhko_MVC.Controllers
                     .Include(item => item.Product)
                     .ToList()
             };
+
+            var cartItems = db.Cart
+                .Where(item => item.UserId == currentUserID)
+                .Include(item => item.Product)
+                .ToList();
+
+            ViewBag.DisableButton = !cartItems.Any();
+
             return View(viewModel);
         }
 
@@ -221,28 +229,54 @@ namespace Dyplom_Rozhko_MVC.Controllers
         [Authorize]
         public ActionResult Order(Orders orders)
         {
-            DyplomEntities db = new DyplomEntities();
-            var currentUserID = User.Identity.GetUserId();
-            var viewModel = new ConnectAllTables
+            if (!ModelState.IsValid)
             {
-                Product = db.Product.ToList(),
-                Category = db.Category.ToList(),
-                Cart = db.Cart
-                    .Where(item => item.UserId == currentUserID)
-                    .Include(item => item.Product)
-                    .ToList(),
-                Orders = db.Orders
-            };
-            foreach (var item in viewModel.Cart)
-            {
-                orders.ProductId = item.ProductId;
-                orders.Quantity = 1;
-                orders.UserId = currentUserID;
-                orders.OrderDate = DateTime.Now;
-                db.Orders.Add(orders);
-                db.Cart.Remove(item);
-                db.SaveChanges();
+                // Повертаємо форму з повідомленнями про помилки
+                DyplomEntities db = new DyplomEntities();
+                var currentUserID = User.Identity.GetUserId();
+                var viewModel = new ConnectAllTables
+                {
+                    Product = db.Product.ToList(),
+                    Category = db.Category.ToList(),
+                    Cart = db.Cart
+                        .Where(item => item.UserId == currentUserID)
+                        .Include(item => item.Product)
+                        .ToList(),
+                    Orders = new List<Orders> { orders }
+                };
+                return View(viewModel);
             }
+
+            DyplomEntities dbContext = new DyplomEntities();
+            var currentUserIDSave = User.Identity.GetUserId();
+            var cartItems = dbContext.Cart
+                .Where(item => item.UserId == currentUserIDSave)
+                .Include(item => item.Product)
+                .ToList();
+
+            foreach (var item in cartItems)
+            {
+                var newOrder = new Orders
+                {
+                    ProductId = item.ProductId,
+                    Quantity = 1,
+                    UserId = currentUserIDSave,
+                    OrderDate = DateTime.Now,
+                    City = orders.City,
+                    DeliveryMethod = orders.DeliveryMethod,
+                    DepartmentNumber = orders.DepartmentNumber,
+                    Email = orders.Email,
+                    Phone = orders.Phone,
+                    PaymentMethod = orders.PaymentMethod,
+                    Status = "Обробляється",
+                    IsCanceled = false
+                };
+
+                dbContext.Orders.Add(newOrder);
+                dbContext.Cart.Remove(item);
+                dbContext.SaveChanges();
+            }
+
             return RedirectToAction("Index", "User");
         }
 
