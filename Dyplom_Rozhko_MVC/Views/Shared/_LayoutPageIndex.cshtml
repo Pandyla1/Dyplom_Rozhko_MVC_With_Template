@@ -89,7 +89,6 @@
                             @Html.ActionLink("Головна", "Index", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                             @Html.ActionLink("Список бажань", "Wishlist", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                             @Html.ActionLink("Кошик", "Cart", "User", new { area = "" }, new { @class = "nav-item nav-link" })
-                            @Html.ActionLink("Оплата", "Checkout", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                             @Html.ActionLink("Контакти", "Contact", "User", new { area = "" }, new { @class = "nav-item nav-link" })
                         </div>
                         @Html.Partial("_LoginPartial")
@@ -163,7 +162,6 @@
                             <a class="text-dark mb-2" href="@Url.Action("Index", "User")"><i class="fa fa-angle-right mr-2"></i>Головна</a>
                             <a class="text-dark mb-2" href="@Url.Action("Wishlist", "User")"><i class="fa fa-angle-right mr-2"></i>Список бажань</a>
                             <a class="text-dark mb-2" href="@Url.Action("Cart", "User")"><i class="fa fa-angle-right mr-2"></i>Кошик</a>
-                            <a class="text-dark mb-2" href="@Url.Action("Checkout", "User")"><i class="fa fa-angle-right mr-2"></i>Оплата</a>
                             <a class="text-dark" href="@Url.Action("Contact", "User")"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
                         </div>
                     </div>
