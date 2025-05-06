@@ -13,36 +13,56 @@
         <div class="col-lg-7 mb-5">
             <div class="contact-form">
                 <div id="success"></div>
-                <form action="https://formsubmit.co/el/z" method="POST" name="sentMessage" id="contactForm" novalidate="novalidate">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-                    @*<div class="control-group">
-                        <input type="text" class="form-control" name="name" placeholder="Your Name"
-                               required="required" data-validation-required-message="Please enter your name" />
-                        <p class="help-block text-danger"></p>
+                    <div class="form-horizontal">
+                        <div style="display: grid; place-items: left; height: auto; ">
+                            <div style="width: 700px; margin-left: 100px;">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Contact.First().Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Contact.First().Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Contact.First().Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Contact.First().Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Contact.First().Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Contact.First().Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Contact.First().Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Contact.First().Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Contact.First().Subject, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Contact.First().Message, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.Contact.First().Message, new { @class = "form-control", rows = "5" })
+                                        @Html.ValidationMessageFor(model => model.Contact.First().Message, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="control-group">
-                        <input type="email" class="form-control" name="email" placeholder="Your Email"
-                               required="required" data-validation-required-message="Please enter your email" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="text" class="form-control" name="subject" placeholder="Subject"
-                               required="required" data-validation-required-message="Please enter a subject" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <textarea class="form-control" rows="6" placeholder="Message"
-                                  required="required"
-                                  data-validation-required-message="Please enter your message"></textarea>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">
-                            Send
-                            Message
-                        </button>
-                    </div>*@
-                </form>
+                }
             </div>
         </div>
         <div class="col-lg-5 mb-5">

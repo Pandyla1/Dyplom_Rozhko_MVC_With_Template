@@ -205,6 +205,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
         //    return View(viewModel);
         //}
 
+        [HttpGet]
         public ActionResult Contact()
         {
             DyplomEntities db = new DyplomEntities();
@@ -212,16 +213,60 @@ namespace Dyplom_Rozhko_MVC.Controllers
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
-                Contact = db.Contact.ToList()
+                Contact = new List<Contact>
+                {
+                    new Contact
+                    {
+
+                    }
+                }
             };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Contact(Contact contact)
+        {
+            DyplomEntities db = new DyplomEntities();
+            var viewModel = new ConnectAllTables
+            {
+                Product = db.Product.ToList(),
+                Category = db.Category.ToList(),
+                Contact = new List<Contact> { contact }
+            };
+            if (ModelState.IsValid)
+            {
+                contact.CreatedDate = DateTime.Now;
+                db.Contact.Add(contact);
+                db.SaveChanges();
+                return RedirectToAction("Contact");
+            }
             return View(viewModel);
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Order() 
-        { 
-            return View();
+        {
+            DyplomEntities db = new DyplomEntities();
+            var currentUserID = User.Identity.GetUserId();
+            var viewModel = new ConnectAllTables
+            {
+                Product = db.Product.ToList(),
+                Category = db.Category.ToList(),
+                Cart = db.Cart
+                        .Where(item => item.UserId == currentUserID)
+                        .Include(item => item.Product)
+                        .ToList(),
+                Orders = new List<Orders> 
+                {
+                    new Orders
+                    {
+                        
+                    }
+                }
+            };
+            return View(viewModel);
         }
 
         [HttpPost]

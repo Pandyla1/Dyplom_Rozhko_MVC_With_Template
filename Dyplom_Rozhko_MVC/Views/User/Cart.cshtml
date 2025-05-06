@@ -22,7 +22,10 @@
                     @foreach (var item in Model.Cart)
                     {
                         <tr>
-                            <td class="align-middle"><img src="" alt="" style="width: 50px;">@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("Product", new { id = item.ProductId })"><img width="70px" class="img-fluid" src="@Url.Content(item.Product.ImageUrl)" alt=""></a>
+                                <a style="color: #6f6f6f" href="@Url.Action("Product", new { id = item.ProductId })">@Html.DisplayFor(modelItem => item.Product.ProductName)</a>
+                            </td>
                             <td class="align-middle">@item.Product.Price₴</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">

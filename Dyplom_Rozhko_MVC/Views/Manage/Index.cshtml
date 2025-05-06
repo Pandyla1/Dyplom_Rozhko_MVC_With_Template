@@ -6,6 +6,13 @@
 
 <main aria-labelledby="title">
     <div style="display: grid; place-items: left; height: auto; ">
+        <div style="width: 900px; margin-left: 100px; margin-bottom: 10px; margin-top: 10px;">
+            <div>
+                <a href="@Url.Action("Index", "User")" style="color: #6f6f6f; font-size: 18px;">Повернутись на головну сторінку</a>
+            </div>
+        </div>
+    </div>
+    <div style="display: grid; place-items: left; height: auto; ">
         <div style="width: 900px; margin-left: 100px;">
             <p class="text-success">@ViewBag.StatusMessage</p>
             <div>
@@ -13,55 +20,55 @@
                 <hr />
                 <dl class="dl-horizontal">
                     @*<dt>Ім'я:</dt>
-                    <dd>
-                        [
-                        @if (Model.HasPassword)
-                        {
-                            @Html.ActionLink("Змінити ім'я", "ChangeName")
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Задати ім'я", "SetName")
-                        }
-                        ]
-                    </dd>*@
-                    <h5>
-                        <dt>Пароль:</dt>
-                    </h5>
-                    <h6>
                         <dd>
                             [
                             @if (Model.HasPassword)
                             {
-                                @Html.ActionLink("Змінити пароль", "ChangePassword")
+                                @Html.ActionLink("Змінити ім'я", "ChangeName")
                             }
                             else
                             {
-                                @Html.ActionLink("Задати пароль", "SetPassword")
+                                @Html.ActionLink("Задати ім'я", "SetName")
                             }
                             ]
-                        </dd>
+                        </dd>*@
+                    <h5>
+                    <dt>Пароль:</dt>
+                    </h5>
+                    <h6>
+                    <dd>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Змінити пароль", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Задати пароль", "SetPassword")
+                        }
+                        ]
+                    </dd>
                     </h6>
                     @*<dt>Номер телефону:</dt>
-        <dd>
-            @(Model.PhoneNumber ?? "Відсутній")
-            [
-            @if (Model.PhoneNumber != null)
-            {
-                <br />
-                @Html.ActionLink("Змінити", "AddPhoneNumber");
-                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="submit" value="Remove" class="btn-link" />
-                }
-            }
-            else
-            {
-                @Html.ActionLink("Додати", "AddPhoneNumber")
-            }
-            ]
-        </dd>*@
+                        <dd>
+                            @(Model.PhoneNumber ?? "Відсутній")
+                            [
+                            @if (Model.PhoneNumber != null)
+                            {
+                                <br />
+                                @Html.ActionLink("Змінити", "AddPhoneNumber");
+                                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="submit" value="Remove" class="btn-link" />
+                                }
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Додати", "AddPhoneNumber")
+                            }
+                            ]
+                        </dd>*@
                 </dl>
             </div>
         </div>

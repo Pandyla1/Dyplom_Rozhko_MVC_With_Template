@@ -21,7 +21,10 @@
                     @foreach (var item in Model.Wishlist)
                     {
                         <tr>
-                            <td class="align-middle"><img src="../User/img/product-1.jpg" alt="" style="width: 50px;">@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                            <td class="align-middle">
+                                <a href="@Url.Action("Product", new { id = item.ProductId })"><img width="70px" class="img-fluid" src="@Url.Content(item.Product.ImageUrl)" alt=""></a>
+                                <a style="color: #6f6f6f" href="@Url.Action("Product", new { id = item.ProductId })">@Html.DisplayFor(modelItem => item.Product.ProductName)</a>
+                            </td>
                             <td class="align-middle">@item.Product.Price₴</td>
                             <td class="align-middle">
                                 <a class="text-dark" href="@Url.Action("AddToCart", new { productId = item.ProductId, toWishlist = true })">
