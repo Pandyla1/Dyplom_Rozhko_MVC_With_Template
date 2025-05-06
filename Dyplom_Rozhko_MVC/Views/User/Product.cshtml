@@ -17,82 +17,9 @@
 
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">@selectedProduct.ProductName</h3>
-            @*<div class="d-flex mb-3">
-                <div class="text-primary mr-2">
-                    <small class="fas fa-star"></small>
-                    <small class="fas fa-star"></small>
-                    <small class="fas fa-star"></small>
-                    <small class="fas fa-star-half-alt"></small>
-                    <small class="far fa-star"></small>
-                </div>
-                <small class="pt-1">(50 Reviews)</small>
-            </div>*@
             <h3 style="margin-bottom: 20px; margin-top: 30px;" class="font-weight-semi-bold mb-4">@selectedProduct.Price₴</h3>
             <p class="mb-4">@selectedProduct.ShortDescription</p>
-            @*<div class="d-flex mb-3">
-                <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
-                <form>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="size-1" name="size">
-                        <label class="custom-control-label" for="size-1">XS</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="size-2" name="size">
-                        <label class="custom-control-label" for="size-2">S</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="size-3" name="size">
-                        <label class="custom-control-label" for="size-3">M</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="size-4" name="size">
-                        <label class="custom-control-label" for="size-4">L</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="size-5" name="size">
-                        <label class="custom-control-label" for="size-5">XL</label>
-                    </div>
-                </form>
-            </div>*@
-            @*<div class="d-flex mb-4">
-                <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
-                <form>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-1" name="color">
-                        <label class="custom-control-label" for="color-1">Black</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-2" name="color">
-                        <label class="custom-control-label" for="color-2">White</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-3" name="color">
-                        <label class="custom-control-label" for="color-3">Red</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-4" name="color">
-                        <label class="custom-control-label" for="color-4">Blue</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-5" name="color">
-                        <label class="custom-control-label" for="color-5">Green</label>
-                    </div>
-                </form>
-            </div>*@
             <div class="d-flex align-items-center mb-4 pt-2">
-                <div class="input-group quantity mr-3" style="width: 130px;">
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary btn-minus">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                    <input type="text" class="form-control bg-secondary text-center" value="1">
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary btn-plus">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
                 <button class="btn btn-primary px-3">
                     <a class="text-dark" href="@Url.Action("AddToCart", new { productId = ViewBag.Id, toWishlist = false })">Додати в кошик</a>
                 </button>
@@ -103,32 +30,22 @@
             <div style="margin-top: 30px" class="tab-pane fade show active">
                 <h5 class="mb-3">Характеристики товару</h5>
                 <div class="row">
-                    <div class="col-md-1">
-                        <ul class="list-group list-group-flush">
-                            <li align="center" class="list-group-item px-0">
-                                Розмір
-                            </li>
-                            <li align="center" class="list-group-item px-0">
-                                Колір
-                            </li>
-                            <li align="center" class="list-group-item px-0">
-                                Виробник
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2">
-                        <ul class="list-group list-group-flush">
-                            <li align="center" class="list-group-item px-0">
-                                @selectedProduct.Size
-                            </li>
-                            <li align="center" class="list-group-item px-0">
-                                @selectedProduct.Color
-                            </li>
-                            <li align="center" class="list-group-item px-0">
-                                @selectedProduct.CompanyName
-                            </li>
-                        </ul>
-                    </div>
+                    <table style="margin-left: 15px;" border="1">
+                        <tbody>
+                            <tr>
+                                <td align="center" style="width: 100px; height: 35px;">Розмір</td>
+                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.Size</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="width: 100px; height: 35px;">Колір</td>
+                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.Color</td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="width: 100px; height: 35px;">Виробник</td>
+                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.CompanyName</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
