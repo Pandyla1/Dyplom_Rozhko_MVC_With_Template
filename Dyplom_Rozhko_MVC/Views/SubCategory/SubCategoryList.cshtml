@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>SubCategoryList</h2>
+<h2>Підкатегорії</h2>
 
 <p>
-    @Html.ActionLink("Create New", "SubCategoryCreate")
+    @Html.ActionLink("Додати", "SubCategoryCreate")
 </p>
 <div style="overflow-y:auto;">
     <table class="table">
@@ -49,8 +49,8 @@
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "SubCategoryEdit", new { id = item.SubCategoryId }) |
-                    @Html.ActionLink("Delete", "SubCategoryDelete", new { id = item.SubCategoryId })
+                    @Html.ActionLink("Редагувати", "SubCategoryEdit", new { id = item.SubCategoryId }) |
+                    @Html.ActionLink("Видалити", "SubCategoryDelete", new { id = item.SubCategoryId })
                 </td>
             </tr>
         }

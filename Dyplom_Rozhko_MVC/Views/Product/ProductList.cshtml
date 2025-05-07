@@ -5,14 +5,17 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>ProductList</h2>
+<h2>Товар</h2>
 
 <p>
-    @Html.ActionLink("Create New", "ProductCreate")
+    @Html.ActionLink("Додати", "ProductCreate")
 </p>
 <div style="overflow-y:auto;">
     <table class="table">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
@@ -59,6 +62,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
                 <td>
@@ -98,8 +104,8 @@
                     @Html.DisplayFor(modelItem => item.ImageUrl)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "ProductEdit", new { id = item.ProductId }) |
-                    @Html.ActionLink("Delete", "ProductDelete", new { id = item.ProductId })
+                    @Html.ActionLink("Редагувати", "ProductEdit", new { id = item.ProductId }) |
+                    @Html.ActionLink("Видалити", "ProductDelete", new { id = item.ProductId })
                 </td>
             </tr>
         }

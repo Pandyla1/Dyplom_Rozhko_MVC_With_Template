@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>CategoryList</h2>
+<h2>Категорії</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CategoryCreate")
+    @Html.ActionLink("Додати", "CategoryCreate")
 </p>
 <div style="overflow-y:auto;">
     <table class="table">
@@ -49,8 +49,8 @@
                     @Html.DisplayFor(modelItem => item.ImageUrl)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "CategoryEdit", new { id = item.CategoryId }, null) |
-                    @Html.ActionLink("Delete", "CategoryDelete", new { id = item.CategoryId })
+                    @Html.ActionLink("Редагувати", "CategoryEdit", new { id = item.CategoryId }, null) |
+                    @Html.ActionLink("Видалити", "CategoryDelete", new { id = item.CategoryId })
                 </td>
             </tr>
         }

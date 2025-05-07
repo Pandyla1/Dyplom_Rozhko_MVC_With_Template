@@ -43,7 +43,7 @@
                     </a>
                     <!-- Лого -->
                     <div class="navbar-brand">
-                        <a href="@Url.Action("Statistics", "Admin")">
+                        <a href="">
                             <span class="logo-text">
                                 <p style="font-size: 32px;">Admin</p>
                             </span>
@@ -71,7 +71,7 @@
                                      width="40">
                                 <span class="ml-2 d-none d-lg-inline-block">
                                     <span>Hello,</span> <span class="text-dark">Oleksii</span> <i data-feather="chevron-down"
-                                                                                                    class="svg-icon"></i>
+                                                                                                  class="svg-icon"></i>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -100,14 +100,21 @@
             <div class="scroll-sidebar" data-sidebarbg="skin6">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+
+                        <li class="nav-small-cap"><span class="hide-menu">Керування Замовленнями</span></li>
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link" href="@Url.Action("Statistics", "Admin")"
+                            <a class="sidebar-link sidebar-link" href="@Url.Action("OrderList", "Order")"
                                aria-expanded="false">
-                                <i data-feather="home" class="feather-icon"></i><span class="hide-menu">Статистика</span>
+                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Замовлення</span>
                             </a>
                         </li>
+
+
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">Керування</span></li>
+
+
+                        <li class="nav-small-cap"><span class="hide-menu">Керування Товаром</span></li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="@Url.Action("CategoryList", "Category")"
@@ -127,16 +134,30 @@
                                 <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Товар</span>
                             </a>
                         </li>
+
+
+                        <li class="list-divider"></li>
+
+
+                        <li class="nav-small-cap"><span class="hide-menu">Користувачі</span></li>
+
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link" href="../Admin/Calendar.aspx"
+                            <a class="sidebar-link" href="@Url.Action("", "")" @*Замінити посилання*@
                                aria-expanded="false">
-                                <i data-feather="calendar" class="feather-icon"></i><span class="hide-menu">Calendar</span>
+                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Користувачі</span>
                             </a>
                         </li>
-                        <!-- Кінець Бокова Панель -->
-</div>
-
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="@Url.Action("", "")" @*Замінити посилання*@
+                               aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Повідомлення</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </aside>
+        <!-- Кінець Бокова Панель -->
 
         <div class="page-wrapper">
 
