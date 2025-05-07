@@ -11,13 +11,22 @@ namespace Dyplom_Rozhko_MVC
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Contact
     {
         public int ComtactId { get; set; }
+
+        [Required(ErrorMessage = "Заповніть поле")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Заповніть поле")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Заповніть поле")]
         public string Subject { get; set; }
+
+        [Required(ErrorMessage = "Заповніть поле")]
         public string Message { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
     }
