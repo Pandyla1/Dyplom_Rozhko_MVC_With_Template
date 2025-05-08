@@ -2,6 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutPageOther.cshtml";
+    decimal price = 0;
+    ViewBag.TotalPrice = price;
 }
 
 <!-- Cart Start -->
@@ -45,6 +47,8 @@
                             <td class="align-middle">@item.Product.Price₴</td>
                             <td class="align-middle"><a href="@Url.Action("DeleteFromCart", new {cartId = item.CartId})"><button class="btn btn-sm btn-primary"><i style="color: black;" class="fa fa-times"></i></button></a></td>
                         </tr>
+                        price += item.Product.Price ?? 0;
+                        ViewBag.TotalPrice = price;
                     }
 
                 </tbody>
@@ -58,7 +62,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Ціна без доставки</h6>
-                        <h6 class="font-weight-medium">150₴</h6>
+                        <h6 class="font-weight-medium">@ViewBag.TotalPrice₴</h6>
                     </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
