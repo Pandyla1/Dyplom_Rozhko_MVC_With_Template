@@ -90,7 +90,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
                     return View(model);
             }
         }
-
+        
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
