@@ -13,7 +13,7 @@
             {
                 <div class="col-lg-4 col-md-6 pb-1">
                     <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                        <a href="@Url.Action("Shop", new { id = item.CategoryId })" class="cat-img position-relative overflow-hidden mb-3">
+                        <a href="@Url.Action("Shop", new { id = item.CategoryId, categoryName = item.CategoryName })" class="cat-img position-relative overflow-hidden mb-3">
                             <img class="img-fluid" src="@Url.Content(item.ImageUrl)" alt="">
                         </a>
                         <h5 align="center" class="font-weight-semi-bold m-0">@Html.DisplayFor(modelItem => item.CategoryName)</h5>

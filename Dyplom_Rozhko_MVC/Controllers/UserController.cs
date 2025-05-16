@@ -23,10 +23,10 @@ namespace Dyplom_Rozhko_MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Shop(int id)
+        public ActionResult Shop(int id, string categoryName)
         {
             DyplomEntities db = new DyplomEntities();
-            //var category = db.Category.Find(id);
+            ViewBag.CategoryName = categoryName;
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product
@@ -259,7 +259,6 @@ namespace Dyplom_Rozhko_MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Повертаємо форму з повідомленнями про помилки
                 DyplomEntities db = new DyplomEntities();
                 var currentUserID = User.Identity.GetUserId();
                 var viewModel = new ConnectAllTables
