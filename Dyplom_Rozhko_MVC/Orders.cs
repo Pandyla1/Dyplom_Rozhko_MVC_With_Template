@@ -11,8 +11,7 @@ namespace Dyplom_Rozhko_MVC
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Orders
     {
         public int OrderDetailsId { get; set; }
@@ -22,23 +21,11 @@ namespace Dyplom_Rozhko_MVC
         public string Status { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<bool> IsCanceled { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public string City { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public string DeliveryMethod { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public Nullable<int> DepartmentNumber { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public string Phone { get; set; }
-
-        [Required(ErrorMessage = "Заповніть поле")]
         public string PaymentMethod { get; set; }
         public Nullable<bool> PaymentStatus { get; set; }
     

@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ebdc0fcc103f4e9885d829d269906a4f" Name="Diagram1">
-        <EntityTypeShape EntityType="DyplomModel.Cart" Width="1.5" PointX="7.5" PointY="15.5" />
-        <EntityTypeShape EntityType="DyplomModel.Category" Width="1.5" PointX="0.75" PointY="6.625" />
-        <EntityTypeShape EntityType="DyplomModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DyplomModel.Orders" Width="1.5" PointX="7.5" PointY="10.875" />
-        <EntityTypeShape EntityType="DyplomModel.Product" Width="1.5" PointX="5.25" PointY="10.625" />
-        <EntityTypeShape EntityType="DyplomModel.SubCategory" Width="1.5" PointX="3" PointY="16.875" />
-        <EntityTypeShape EntityType="DyplomModel.Wishlist" Width="1.5" PointX="7.5" PointY="8.125" />
-        <AssociationConnector Association="DyplomModel.FK_Cart_Product" />
-        <AssociationConnector Association="DyplomModel.FK_Product_Category" />
-        <AssociationConnector Association="DyplomModel.FK_SubCategory_Category" />
-        <AssociationConnector Association="DyplomModel.FK_Orders_Product" />
-        <AssociationConnector Association="DyplomModel.FK_Product_SubCategory" />
-        <AssociationConnector Association="DyplomModel.FK_Wishlist_Product" />
+      <Diagram DiagramId="2ce0a6dc8e6a42f3b12b2cb69e1a8760" Name="Diagram1">
+        <EntityTypeShape EntityType="DyplomModel.Cart" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Category" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Orders" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Product" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.SubCategory" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DyplomModel.Wishlist" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
+        <AssociationConnector Association="DyplomModel.FK_Cart_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DyplomModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DyplomModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DyplomModel.FK_Orders_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DyplomModel.FK_Product_SubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DyplomModel.FK_Wishlist_Product" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
