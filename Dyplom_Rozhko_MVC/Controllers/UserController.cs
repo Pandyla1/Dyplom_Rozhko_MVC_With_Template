@@ -14,9 +14,18 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Index()
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Category = db.Category.ToList(),
             };
             return View(viewModel);
@@ -26,12 +35,21 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Shop(int id, string categoryName)
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
             ViewBag.CategoryName = categoryName;
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product
                     .Where(item => item.CategoryId == id)
                     .Include(item => item.Category)
+                    .ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
                     .ToList(),
                 Category = db.Category.ToList(),
             };
@@ -42,12 +60,24 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Product(int id)
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
             var product = db.Product.Find(id);
+
             var viewModel = new ConnectAllTables
             {
                 Product = new List<Product> { product },
                 Category = db.Category.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList()
             };
+
+            
             ViewBag.Id = id;
             return View(viewModel);
         }
@@ -124,6 +154,10 @@ namespace Dyplom_Rozhko_MVC.Controllers
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Category = db.Category.ToList(),
                 Cart = db.Cart
                     .Where(item=> item.UserId == currentUserID)
@@ -182,6 +216,10 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 Wishlist = db.Wishlist
                     .Where(item => item.UserId == currentUserID)
                     .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
                     .ToList()
             };
             return View(viewModel);
@@ -192,10 +230,19 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Contact()
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Contact = new List<Contact>
                 {
                     new Contact
@@ -215,6 +262,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
+                Cart = db.Cart.ToList(),
                 Contact = new List<Contact> { contact }
             };
             if (ModelState.IsValid)
@@ -237,10 +285,14 @@ namespace Dyplom_Rozhko_MVC.Controllers
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Cart = db.Cart
-                        .Where(item => item.UserId == currentUserID)
-                        .Include(item => item.Product)
-                        .ToList(),
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Orders = new List<Orders> 
                 {
                     new Orders

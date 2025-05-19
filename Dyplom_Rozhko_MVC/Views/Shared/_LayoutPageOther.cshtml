@@ -1,6 +1,20 @@
 ﻿@model Dyplom_Rozhko_MVC.Models.ConnectAllTables
 @using Microsoft.AspNet.Identity
 
+@{
+    int cartNumber = 0;
+    foreach (var item in Model.Cart)
+    {
+        cartNumber++;
+    }
+
+    int wishlistNumber = 0;
+    foreach (var item in Model.Wishlist)
+    {
+        wishlistNumber++;
+    }
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -43,11 +57,11 @@
             <div class="col-lg-3 col-6 text-right">
                 <a href="@Url.Action("Wishlist", "User")" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
-                    <span class="badge"></span>
+                    <span class="badge">@wishlistNumber</span>
                 </a>
                 <a href="@Url.Action("Cart", "User")" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge"></span>
+                    <span class="badge">@cartNumber</span>
                 </a>
             </div>
 
@@ -64,18 +78,18 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: auto">
-                        
-                            @if (Model.Category != null && Model.Category.Any())
+
+                        @if (Model.Category != null && Model.Category.Any())
+                        {
+                            foreach (var item in Model.Category)
                             {
-                                foreach (var item in Model.Category)
-                                {
-                                    <a href="@Url.Action("Shop", new { id = item.CategoryId, categoryName = item.CategoryName })" class="nav-item nav-link">@Html.DisplayFor(modelItem => item.CategoryName)</a>
-                                }
+                                <a href="@Url.Action("Shop", new { id = item.CategoryId, categoryName = item.CategoryName })" class="nav-item nav-link">@Html.DisplayFor(modelItem => item.CategoryName)</a>
                             }
-                            else
-                            {
-                                <p class="nav-item nav-link text-danger">Категорії відсутні</p>
-                            }
+                        }
+                        else
+                        {
+                            <p class="nav-item nav-link text-danger">Категорії відсутні</p>
+                        }
                     </div>
                 </nav>
             </div>

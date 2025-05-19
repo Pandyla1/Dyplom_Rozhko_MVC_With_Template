@@ -1,5 +1,20 @@
 ﻿@model Dyplom_Rozhko_MVC.Models.ConnectAllTables
 
+@{ 
+    int cartNumber = 0;
+    foreach (var item in Model.Cart)
+    {
+        cartNumber++;
+    }
+
+    int wishlistNumber = 0;
+    foreach (var item in Model.Wishlist)
+    {
+        wishlistNumber++;
+    }
+}
+
+
 <!DOCTYPE html>
 
 <html>
@@ -42,11 +57,11 @@
             <div class="col-lg-3 col-6 text-right">
                 <a href="@Url.Action("Wishlist", "User")" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
-                    <span class="badge"></span>
+                    <span class="badge">@wishlistNumber</span>
                 </a>
                 <a href="@Url.Action("Cart", "User")" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge"></span>
+                    <span class="badge">@cartNumber</span>
                 </a>
             </div>
         </div>
