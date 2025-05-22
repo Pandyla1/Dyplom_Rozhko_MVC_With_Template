@@ -19,27 +19,28 @@
             <!-- Color Start -->
             <div class="border-bottom mb-4 pb-4">
                 <h5 class="font-weight-semi-bold mb-4">Фільтрація за кольорами</h5>
-                <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">Всі кольори</label>
+                <form method="get" action="@Url.Action("Shop", "User")">
+                    <input type="hidden" name="id" value="@Request.QueryString["id"]" />
+                    <input type="hidden" name="categoryName" value="@ViewBag.CategoryName" />
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-red" name="colors" value="Червоний" />
+                        <label class="custom-control-label" for="color-red">Червоний</label>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-1">
-                        <label class="custom-control-label" for="color-1">Червоний</label>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-white" name="colors" value="Білий" />
+                        <label class="custom-control-label" for="color-white">Білий</label>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-2">
-                        <label class="custom-control-label" for="color-2">Білий</label>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-purple" name="colors" value="Фіолетовий" />
+                        <label class="custom-control-label" for="color-purple">Фіолетовий</label>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-3">
-                        <label class="custom-control-label" for="color-3">Фіолетовий</label>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-blue" name="colors" value="Блакитний" />
+                        <label class="custom-control-label" for="color-blue">Блакитний</label>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-4">
-                        <label class="custom-control-label" for="color-4">Блакитний</label>
-                    </div>
+
+                    <button type="submit" class="btn btn-primary">Фільтрувати</button>
                 </form>
             </div>
             <!-- Color End -->

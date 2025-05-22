@@ -32,29 +32,39 @@ namespace Dyplom_Rozhko_MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Shop(int id, string categoryName)
+        public ActionResult Shop(int id, string categoryName, string[] colors)
         {
             DyplomEntities db = new DyplomEntities();
             var currentUserId = User.Identity.GetUserId();
             ViewBag.CategoryName = categoryName;
+
+            var products = db.Product
+                .Where(p => p.CategoryId == id && p.IsActive == true);
+
+            if (colors != null && colors.Any())
+            {
+                products = products.Where(p => colors.Contains(p.Color));
+            }
+
             var viewModel = new ConnectAllTables
             {
-                Product = db.Product
-                    .Where(item => item.CategoryId == id)
-                    .Include(item => item.Category)
+                Product = products
+                    .Include(p => p.Category)
                     .ToList(),
                 Wishlist = db.Wishlist
-                    .Where(item => item.UserId == currentUserId)
-                    .Include(item => item.Product)
+                    .Where(w => w.UserId == currentUserId)
+                    .Include(w => w.Product)
                     .ToList(),
                 Cart = db.Cart
-                    .Where(item => item.UserId == currentUserId)
-                    .Include(item => item.Product)
+                    .Where(c => c.UserId == currentUserId)
+                    .Include(c => c.Product)
                     .ToList(),
                 Category = db.Category.ToList(),
             };
+
             return View(viewModel);
         }
+
 
         [HttpGet]
         public ActionResult Product(int id)
