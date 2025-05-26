@@ -335,6 +335,10 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 {
                     Product = db.Product.ToList(),
                     Category = db.Category.ToList(),
+                    Wishlist = db.Wishlist
+                        .Where(item => item.UserId == currentUserID)
+                        .Include(item => item.Product)
+                        .ToList(),
                     Cart = db.Cart
                         .Where(item => item.UserId == currentUserID)
                         .Include(item => item.Product)
