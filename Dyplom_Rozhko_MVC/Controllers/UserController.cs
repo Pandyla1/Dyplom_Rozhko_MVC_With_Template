@@ -268,11 +268,19 @@ namespace Dyplom_Rozhko_MVC.Controllers
         public ActionResult Contact(Contact contact)
         {
             DyplomEntities db = new DyplomEntities();
+            var currentUserId = User.Identity.GetUserId();
             var viewModel = new ConnectAllTables
             {
                 Product = db.Product.ToList(),
                 Category = db.Category.ToList(),
-                Cart = db.Cart.ToList(),
+                Wishlist = db.Wishlist
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
+                Cart = db.Cart
+                    .Where(item => item.UserId == currentUserId)
+                    .Include(item => item.Product)
+                    .ToList(),
                 Contact = new List<Contact> { contact }
             };
             if (ModelState.IsValid)

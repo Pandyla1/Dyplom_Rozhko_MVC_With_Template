@@ -27,27 +27,30 @@
                     <a class="text-dark" href="@Url.Action("AddToWishlist", new { productId = ViewBag.Id })">Додати в бажане</a>
                 </button>
             </div>
-            <div style="margin-top: 30px" class="tab-pane fade show active">
+            <div style="margin-top: 30px;" class="tab-pane fade show active">
                 <h5 class="mb-3">Характеристики товару</h5>
                 <div class="row">
-                    <table style="margin-left: 15px;" border="1">
-                        <tbody>
-                            <tr>
-                                <td align="center" style="width: 100px; height: 35px;">Розмір</td>
-                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.Size</td>
-                            </tr>
-                            <tr>
-                                <td align="center" style="width: 100px; height: 35px;">Колір</td>
-                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.Color</td>
-                            </tr>
-                            <tr>
-                                <td align="center" style="width: 100px; height: 35px;">Виробник</td>
-                                <td align="center" style="width: 100px; height: 35px;">@selectedProduct.CompanyName</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="col-md-6">
+                        <table class="table table-bordered" style="border-radius: 8px; overflow: hidden;">
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #f8f9fa; width: 100px ">Розмір</td>
+                                    <td>@selectedProduct.Size</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #f8f9fa;">Колір</td>
+                                    <td>@selectedProduct.Color</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; background-color: #f8f9fa;">Виробник</td>
+                                    <td>@selectedProduct.CompanyName</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
