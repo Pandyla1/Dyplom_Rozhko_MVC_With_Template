@@ -393,7 +393,7 @@ namespace Dyplom_Rozhko_MVC.Controllers
                 var newOrder = new Orders
                 {
                     ProductId = item.ProductId,
-                    Quantity = 1,
+                    Quantity = item.Quantity,
                     UserId = currentUserIDSave,
                     OrderDate = DateTime.Now,
                     City = orders.City,
