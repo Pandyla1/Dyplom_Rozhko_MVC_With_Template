@@ -156,6 +156,39 @@ namespace Dyplom_Rozhko_MVC.Controllers
             return RedirectToAction("Cart");
         }
 
+        public ActionResult PlusProduct(int cartId)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            using (DyplomEntities db = new DyplomEntities())
+            {
+                Cart cart = db.Cart.Find(cartId);
+
+                cart.Quantity++;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Cart");
+        }
+
+        public ActionResult MinusProduct(int cartId)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            using (DyplomEntities db = new DyplomEntities())
+            {
+                Cart cart = db.Cart.Find(cartId);
+
+                cart.Quantity--;
+                if (cart.Quantity <= 0)
+                {
+                    DeleteFromCart(cartId);
+                }
+                else
+                {
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Cart");
+        }
+
         [Authorize]
         public ActionResult Cart()
         {
