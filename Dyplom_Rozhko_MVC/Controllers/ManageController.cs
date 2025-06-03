@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Dyplom_Rozhko_MVC.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Dyplom_Rozhko_MVC.Models;
 
 namespace Dyplom_Rozhko_MVC.Controllers
 {
@@ -217,7 +218,17 @@ namespace Dyplom_Rozhko_MVC.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            DyplomEntities db = new DyplomEntities();
+            var currentUserID = User.Identity.GetUserId();
+            var viewModel = new ChangePasswordViewModel
+            {
+                Product = db.Product.ToList(),
+                Orders = db.Orders
+                    .Where(item => item.UserId == currentUserID)
+                    .Include(item => item.Product)
+                    .ToList()
+            };
+            return View(viewModel);
         }
 
         //

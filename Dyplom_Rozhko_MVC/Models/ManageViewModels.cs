@@ -56,6 +56,9 @@ namespace Dyplom_Rozhko_MVC.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public IEnumerable<Dyplom_Rozhko_MVC.Orders> Orders { get; set; }
+        public IEnumerable<Dyplom_Rozhko_MVC.Product> Product { get; set; }
     }
 
     public class AddPhoneNumberViewModel
