@@ -20,12 +20,16 @@
             <h3 style="margin-bottom: 20px; margin-top: 30px;" class="font-weight-semi-bold mb-4">@selectedProduct.Price₴</h3>
             <p class="mb-4">@selectedProduct.ShortDescription</p>
             <div class="d-flex align-items-center mb-4 pt-2">
-                <button class="btn btn-primary px-3">
-                    <a class="text-dark" href="@Url.Action("AddToCart", new { productId = ViewBag.Id, toWishlist = false })">Додати в кошик</a>
-                </button>
-                <button style="margin-left:10px;" class="btn btn-primary px-3">
-                    <a class="text-dark" href="@Url.Action("AddToWishlist", new { productId = ViewBag.Id })">Додати в бажане</a>
-                </button>
+                <a class="text-dark" href="@Url.Action("AddToCart", new { productId = ViewBag.Id, toWishlist = false })">
+                    <button class="btn btn-primary px-3">
+                        Додати в кошик
+                    </button>
+                </a>
+                <a class="text-dark" href="@Url.Action("AddToWishlist", new { productId = ViewBag.Id })">
+                    <button style="margin-left:10px;" class="btn btn-primary px-3">
+                        Додати в бажане
+                    </button>
+                </a>
             </div>
             <div style="margin-top: 30px;" class="tab-pane fade show active">
                 <h5 class="mb-3">Характеристики товару</h5>
